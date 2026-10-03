@@ -13,8 +13,6 @@ class.define("npc", {
     visual_size = {x=-10, y=10},
     physical = true,
     collide_with_objects = true,
-    -- collisionbox = {-0.3, -0.3, -0.3, 0.3, 0.3, 0.3},
-
     stepheight = 0.6
   },
 
@@ -311,7 +309,7 @@ class.extends("cow", npc, {
     visual = "mesh",
     mesh = "cow.obj",
     textures = {"cow.png"},
-    visual_size = {x=-5, y=5},
+    visual_size = {x=-10, y=10},
     physical = true,
     collide_with_objects = true,
   },
@@ -356,6 +354,8 @@ class.extends("cow", npc, {
     core.chat_send_player(puncher:get_player_name(), "YOU DONT NEED MY BEEF, ~!@#$%^&*()_+!, AND I CAN\"T EVEN SAY THAT WORD UNCENSORED!")
   end,
 })
+
+
 
 core.register_entity("npc:npc", class.new(npc))
 core.register_entity("npc:cow", class.new(cow))

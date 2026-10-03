@@ -1,10 +1,21 @@
 core.register_on_joinplayer(function(ObjectRef, last_login)
     core.log(ObjectRef:get_player_name() .. " joined the game")
+    if ObjectRef:get_player_name() == "FocusPup824" then
+      texture = "FocusPup824.png"
+    else
+      texture = "player.png"
+    end
     ObjectRef:set_properties({
         visual      = "mesh",
         mesh        = "player.obj",
-        textures    = {"player.png"},
+        textures    = {texture},
         visual_size = {x=-10, y=10},
+    })
+    ObjectRef:hud_set_flags({
+      hotbar = false,
+      wielditem = true,
+      minimap = false,
+      health=false
     })
 end)
 
