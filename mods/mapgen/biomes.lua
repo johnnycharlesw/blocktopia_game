@@ -18,7 +18,7 @@ core.register_biome({ -- Decide when trees should and should not generate
     depth_filler = 3,
     y_max = 5000,
     y_min = -32767,
-    heat_point = 50,
+    heat_point = 70,
     humidity_point = 50,
 })
 

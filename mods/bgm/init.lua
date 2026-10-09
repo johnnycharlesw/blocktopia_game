@@ -36,12 +36,13 @@ local function play_next(player_name)
     end
 
     local song = tracks[data.track]
-
-    data.handle = core.sound_play(song.name, {
-        to_player = player_name,
-        gain = 1.0,
-        loop = false,
-    })
+    if not data.nobgm then
+        data.handle = core.sound_play(song.name, {
+            to_player = player_name,
+            gain = 1.0,
+            loop = false,
+        })
+    end
 
     -- Schedule the next song
     data.job = core.after(song.duration, function()
@@ -57,6 +58,7 @@ core.register_on_joinplayer(function(player)
         track = 0,
         handle = nil,
         job = nil,
+        nobgm = false
     }
 
     play_next(name)
@@ -79,3 +81,26 @@ core.register_on_leaveplayer(function(player)
         players[name] = nil
     end
 end)
+
+core.register_chatcommand("togglebgm", {
+    params = "",
+    description = "Toggle the bgm",
+    privs = {},
+
+    func = function(name)
+        local data = players[name]
+        if data.nobgm then
+            core.chat_send_all("BGM will play for "..name)
+            data.nobgm = false
+            data.job:cancel()
+            play_next(name)
+        else
+            core.chat_send_all("BGM won't play for "..name)
+            if data.handle then
+                core.sound_stop(data.handle)
+            end
+            data.job:cancel()
+            data.nobgm = true
+        end
+    end,
+})

@@ -1,7 +1,20 @@
+local mp = core.get_modpath(core.get_current_modname())
+local skins = core.get_dir_list(mp .. '/textures', false)
+
+function contains(list, item)
+    for _, value in ipairs(list) do
+        if value == item then
+            return true
+        end
+    end
+    return false
+end
+
 core.register_on_joinplayer(function(ObjectRef, last_login)
-    core.log(ObjectRef:get_player_name() .. " joined the game")
-    if ObjectRef:get_player_name() == "FocusPup824" then
-      texture = "FocusPup824.png"
+    core.chat_send_all(ObjectRef:get_player_name() .. " joined the game")
+    skins = core.get_dir_list(mp .. '/textures', false)
+    if contains(skins, ObjectRef:get_player_name()..".png") then
+      texture = ObjectRef:get_player_name()..".png"
     else
       texture = "player.png"
     end
