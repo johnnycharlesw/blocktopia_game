@@ -36,7 +36,8 @@ core.register_node("natural_blocks:oak_log", {
         "oak_log.png", -- Left
         "oak_log.png", -- Back
         "oak_log.png" -- Front
-    }
+    },
+    sounds = wood_sounds
 })
 
 core.register_node("natural_blocks:dark_oak_log", {
@@ -48,7 +49,8 @@ core.register_node("natural_blocks:dark_oak_log", {
         "dark_oak_log.png", -- Left
         "dark_oak_log.png", -- Back
         "dark_oak_log.png" -- Front
-    }
+    },
+    sounds = wood_sounds
 })
 
 core.register_node("natural_blocks:oak_leaves", {

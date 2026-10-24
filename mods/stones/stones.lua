@@ -1,4 +1,8 @@
 stone_sounds = {
+    footstep = {
+        name = "stones_stone_break",
+        gain = 0.25,
+    },
     dig = {
         name = "stones_stone_break",
         gain = 0.5,
