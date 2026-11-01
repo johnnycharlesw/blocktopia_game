@@ -63,3 +63,34 @@ core.register_entity("player_manager:npc_builder", {
     })
   end,
 })
+
+local function place_facing_player(itemstack, placer, pointed_thing)
+    local pos = pointed_thing.above
+
+    local dir = vector.direction(pos, placer:get_pos())
+    local param2 = core.dir_to_facedir(dir)
+
+    return core.item_place_node(
+        itemstack,
+        placer,
+        pointed_thing,
+        param2
+    )
+end
+
+local skins = core.get_dir_list(mp .. "/textures", false)
+
+for _, skin in ipairs(skins) do
+    if skin:lower():match("%.png$") then
+        local name = skin:gsub("%.png$", "")
+        local node_name = name:lower():gsub("[^a-z0-9_]", "_")
+
+        core.register_node("player_manager:" .. node_name .. "_statue", {
+            description = "Statue of " .. name,
+            drawtype = "mesh",
+            mesh = "player.obj",
+            on_place = place_facing_player,
+            tiles = {skin},
+        })
+    end
+end
